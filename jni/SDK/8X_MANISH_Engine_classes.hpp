@@ -1,13 +1,12 @@
 #pragma once
 
-// SDK BY - @Manish8x (4.2.0 -- 64Bit) SDK 工具 By 无名 @Manish8x
-// Telegram频道:- @Manish8x
-// 此文件生成时间Thu Jan 15 10:48:18 2026
- #pragma once
+#include <stdint.h>
+#include <stddef.h>
 
-#include <cstdint>  
+typedef unsigned char uint8_t;
 
-namespace SDK
+namespace SDK 
+{
 enum class EAttachmentRule : uint8_t {
     KeepRelative = 0,
     KeepWorld = 1,
@@ -21,27 +20,17 @@ enum class EDetachmentRule : uint8_t {
     Count = 2
 };
 
-{
-//---------------------By 无名 @Manish8x---------------------------
-//Classes
-//---------------------By 无名 @Manish8x---------------------------
-
-// Class Engine.BlueprintFunctionLibrary
-// 0x0000 (0x0028 - 0x0028)
+// Classes yahan se shuru hongi
 class UBlueprintFunctionLibrary : public UObject
 {
 public:
-
-	static UClass* StaticClass()
-	{
-        static UClass *pStaticClass = 0;
-        if (!pStaticClass)
-            pStaticClass = UObject::FindClass("Class Engine.BlueprintFunctionLibrary");
-		return pStaticClass;
-	}
-
+    static UClass* StaticClass()
+    {
+        static UClass* ptr = nullptr;
+        if (!ptr) ptr = UObject::FindClass("Class Engine.BlueprintFunctionLibrary");
+        return ptr;
+    }
 };
-
 
 // Class Engine.ActorComponent
 // 0x0150 (0x0178 - 0x0028)
@@ -118,7 +107,9 @@ public:
 	class AActor* GetOwner();
 	float GetComponentTickInterval();
 	void ForceNetUpdate();
-	void FlushNetDormancyOnceForReplay();
+	void SetReplicateMovement(bool bInReplicateMovement);
+	void SetParallelWorldId(int InWorldId, int Masks);
+	void SetOwner(class AActor* NewOwner);	void FlushNetDormancyOnceForReplay();
 	void Deactivate();
 	bool ComponentHasTag(const struct FName& Tag);
 	void AddTickPrerequisiteComponent(class UActorComponent* PrerequisiteComponent);
@@ -263,9 +254,7 @@ public:
 	void SetTickGroup(TEnumAsByte<enum ETickingGroup> NewTickGroup);
 	void SetTickableWhenPaused(bool bTickableWhenPaused);
 	void SetReplicates(bool bInReplicates);
-	void SetReplicateMovement(bool bInReplicateMovement);
-	void SetParallelWorldId(int InWorldId, int Masks);
-	void SetOwner(class AActor* NewOwner);
+
 	void SetNetUpdateGroupID(unsigned char InGroupID);
 	void SetNetUpdateGroup(class AActor* InConnectionActor);
 	void SetNetDormancy(TEnumAsByte<enum ENetDormancy> NewDormancy);
