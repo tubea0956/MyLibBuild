@@ -3,7 +3,10 @@
 // SDK BY - @Manish8x (4.2.0 -- 64Bit) SDK 工具 By 无名 @Manish8x
 // Telegram频道:- @Manish8x
 // 此文件生成时间Thu Jan 15 10:48:18 2026
- 
+ #pragma once
+
+#include <cstdint>  
+
 namespace SDK
 enum class EAttachmentRule : uint8_t {
     KeepRelative = 0,
