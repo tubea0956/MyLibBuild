@@ -8,21 +8,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
+      - name: Set up NDK
+        uses: android-actions/setup-android@v3
+        # Isse saare Android tools aur NDK sahi se set ho jayenge
 
-      - name: Setup NDK
-        uses: nmirror/setup-ndk@v1
-        with:
-          ndk-version: r25c
+      - name: Install NDK r25c
+        run: sdkmanager "ndk;25.2.9519653"
+        # r25c ka exact version install karne ke liye
 
       - name: Build with ndk-build
         run: |
           cd jni
-          ndk-build
+          $ANDROID_HOME/ndk/25.2.9519653/ndk-build
+        # Direct path use kar rahe hain taaki "command not found" na aaye
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
