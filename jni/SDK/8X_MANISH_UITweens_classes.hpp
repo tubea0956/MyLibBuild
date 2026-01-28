@@ -1,0 +1,37 @@
+#pragma once
+
+// SDK BY - @Manish8x (4.2.0 -- 64Bit) SDK 工具 By 无名 @Manish8x
+// Telegram频道:- @Manish8x
+// 此文件生成时间Thu Jan 15 10:48:23 2026
+ 
+namespace SDK
+{
+//---------------------By 无名 @Manish8x---------------------------
+//Classes
+//---------------------By 无名 @Manish8x---------------------------
+
+// Class UITweens.TweenManager
+// 0x0028 (0x0050 - 0x0028)
+class UTweenManager : public UObject
+{
+public:
+	unsigned char                                      UnknownData00[0x28];                                      // 0x0028(0x0028) MISSED OFFSET
+
+	static UClass* StaticClass()
+	{
+        static UClass *pStaticClass = 0;
+        if (!pStaticClass)
+            pStaticClass = UObject::FindClass("Class UITweens.TweenManager");
+		return pStaticClass;
+	}
+
+
+	void TweenScale(class UWidget* Widget, const struct FVector2D& from, const struct FVector2D& to, float Timespan, int Type);
+	void TweenPosition(class UWidget* Widget, const struct FVector2D& from, const struct FVector2D& to, float Timespan, int Type);
+	void TweenAlpha(class UWidget* Widget, float from, float to, float Timespan, int Type);
+	void Tick(float DeltaTime);
+};
+
+
+}
+
