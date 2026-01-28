@@ -1,5 +1,4 @@
 LOCAL_PATH := $(call my-dir)
-MAIN_LOCAL_PATH := $(call my-dir)
 
 # 1. External Libraries (CURL & SSL)
 include $(CLEAR_VARS)
@@ -28,18 +27,23 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := WISDOM_SRC
 
-# --- UPDATED FLAGS (Inse Errors kam honge) ---
+# --- UPDATED FLAGS (Unreal Engine & Error Fixes) ---
 LOCAL_CFLAGS := -Wno-error=format-security -fvisibility=hidden -ffunction-sections -fdata-sections -w -DNDEBUG
 LOCAL_CFLAGS += -fno-rtti -fno-exceptions -fpermissive
+# Unreal Engine Specific Flags
+LOCAL_CFLAGS += -DUE_BUILD_RELEASE=1 -DUNICODE -D_UNICODE
+
 LOCAL_CPPFLAGS := -Wno-error=format-security -fvisibility=hidden -ffunction-sections -fdata-sections -w -std=c++17 -O3
 LOCAL_CPPFLAGS += -fno-rtti -fno-exceptions -fpermissive
 
-# --- MISSING SDK INCLUDES (Yaha fix hai) ---
+# --- SDK INCLUDES (Proper Search Paths) ---
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                    $(LOCAL_PATH)/SDK \
                    $(LOCAL_PATH)/curl/curl-android-$(TARGET_ARCH_ABI)/include \
                    $(LOCAL_PATH)/curl/openssl-android-$(TARGET_ARCH_ABI)/include \
-                   $(LOCAL_PATH)/Helper/Dobby/include
+                   $(LOCAL_PATH)/Helper/Dobby/include \
+                   $(LOCAL_PATH)/imgui \
+                   $(LOCAL_PATH)/imgui/backends
 
 LOCAL_LDFLAGS += -Wl,--gc-sections,--strip-all -llog
 
