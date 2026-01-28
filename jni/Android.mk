@@ -17,7 +17,7 @@ LOCAL_MODULE := libcrypto
 LOCAL_SRC_FILES := curl/openssl-android-$(TARGET_ARCH_ABI)/lib/libcrypto.a
 include $(PREBUILT_STATIC_LIBRARY)
 
-# 2. Dobby Hooking Engine (64-bit ke liye mandatory)
+# 2. Dobby Hooking Engine
 include $(CLEAR_VARS)
 LOCAL_MODULE := libdobby
 LOCAL_SRC_FILES := Helper/Dobby/libraries/$(TARGET_ARCH_ABI)/libdobby.a
@@ -28,20 +28,22 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := WISDOM_SRC
 
-# 64-bit Stealth Flags
+# --- UPDATED FLAGS (Inse Errors kam honge) ---
 LOCAL_CFLAGS := -Wno-error=format-security -fvisibility=hidden -ffunction-sections -fdata-sections -w -DNDEBUG
 LOCAL_CFLAGS += -fno-rtti -fno-exceptions -fpermissive
 LOCAL_CPPFLAGS := -Wno-error=format-security -fvisibility=hidden -ffunction-sections -fdata-sections -w -std=c++17 -O3
 LOCAL_CPPFLAGS += -fno-rtti -fno-exceptions -fpermissive
+
+# --- MISSING SDK INCLUDES (Yaha fix hai) ---
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+                   $(LOCAL_PATH)/SDK \
+                   $(LOCAL_PATH)/curl/curl-android-$(TARGET_ARCH_ABI)/include \
+                   $(LOCAL_PATH)/curl/openssl-android-$(TARGET_ARCH_ABI)/include \
+                   $(LOCAL_PATH)/Helper/Dobby/include
+
 LOCAL_LDFLAGS += -Wl,--gc-sections,--strip-all -llog
 
-# Include Paths
-LOCAL_C_INCLUDES += $(MAIN_LOCAL_PATH)
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/curl/curl-android-$(TARGET_ARCH_ABI)/include
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/curl/openssl-android-$(TARGET_ARCH_ABI)/include
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/Helper/Dobby/include
-
-# Source Files (Filtered for 64-bit Stealth)
+# Source Files
 LOCAL_SRC_FILES := main.cpp \
     Cruel.cpp \
     patch/KittyMemory.cpp \
