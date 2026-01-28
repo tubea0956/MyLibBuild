@@ -5,6 +5,19 @@
 // 此文件生成时间Thu Jan 15 10:48:18 2026
  
 namespace SDK
+enum class EAttachmentRule : uint8_t {
+    KeepRelative = 0,
+    KeepWorld = 1,
+    SnapToTarget = 2,
+    Count = 3
+};
+
+enum class EDetachmentRule : uint8_t {
+    KeepRelative = 0,
+    KeepWorld = 1,
+    Count = 2
+};
+
 {
 //---------------------By 无名 @Manish8x---------------------------
 //Classes
